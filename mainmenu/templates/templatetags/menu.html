@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Тестовое задание для UpTrader</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03"
+                aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                {% for menu in menus %}
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03"
+                   data-bs-toggle="dropdown" aria-expanded="false">{{ menu.name}}</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdown03">
+                    {% for menu_item in output.data %}
+                    {% if menu_item.item.menu == menu %}
+                        <li сlass="dropdown-item">
+                            <a class="dropdown-toggle" href="{%if menu_item.item.parent %}#{% else %}{{ menu_item.item.url }} {% endif%}"
+                               data-bs-toggle="dropdown" id="dropdown04" aria-expanded="false">{{ menu_item.item.name}}</a>
+                                {% for m_item in menu_item.sub_menu %}
+                                <ul class="dropdown-submenu" aria-labelledby="dropdown04">
+                                    <li class="dropdown-item">
+                                        <a  href="{{ m_item.url }}">{{ m_item.name }}</a>
+                                    </li>
+                                </ul>
+                                {% endfor %}
+
+                        </li>
+                    {% endif%}
+                    {% endfor %}
+
+                </ul>
+                {% endfor %}
+            </ul>
+            <form>
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+</nav>
